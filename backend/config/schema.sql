@@ -29,3 +29,16 @@ CREATE TABLE IF NOT EXISTS sessions (
     expires_at TIMESTAMP WITH TIME ZONE NOT NULL,
     last_used_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
+CREATE TABLE IF NOT EXISTS login_attempts (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(id) ON DELETE SET NULL,  -- NULL = user not found
+    email VARCHAR(255),                             -- attempted email
+    ip_address VARCHAR(45) NOT NULL,
+    user_agent TEXT,
+    success BOOLEAN NOT NULL,
+    failure_reason VARCHAR(100),                    -- 'invalid_password' | 'account_locked' | 'user_not_found'
+    is_suspicious BOOLEAN DEFAULT FALSE,            -- flagged by detection system
+    suspicious_reason VARCHAR(255),                 -- 'new_ip' | 'new_device' | 'unusual_time'
+    country VARCHAR(100),                           -- optional geo info
+    attempted_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
