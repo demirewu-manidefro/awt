@@ -51,3 +51,12 @@ CREATE TABLE IF NOT EXISTS password_reset_tokens (
     used_at TIMESTAMP WITH TIME ZONE,              -- NULL = not used yet
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
+
+-- index for performance
+CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
+CREATE INDEX IF NOT EXISTS idx_users_google_id ON users(google_id);
+CREATE INDEX IF NOT EXISTS idx_sessions_user_id ON sessions(user_id);
+CREATE INDEX IF NOT EXISTS idx_sessions_refresh_token ON sessions(refresh_token_hash);
+CREATE INDEX IF NOT EXISTS idx_login_attempts_user_id ON login_attempts(user_id);
+CREATE INDEX IF NOT EXISTS idx_login_attempts_ip ON login_attempts(ip_address);
+CREATE INDEX IF NOT EXISTS idx_login_attempts_email ON login_attempts(email);
