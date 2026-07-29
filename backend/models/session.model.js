@@ -14,7 +14,7 @@ const SessionModel = {
    */
   async create({ userId, refreshToken, ip, userAgent, deviceInfo, browserInfo }) {
     const tokenHash = await bcrypt.hash(refreshToken, 10);
-    const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); // 7 days
+    const expiresAt = new Date(Date.now() + 1 * 60 * 1000); // 5 minutes
 
     const result = await pool.query(
       `INSERT INTO sessions
