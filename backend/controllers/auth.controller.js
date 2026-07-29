@@ -100,6 +100,11 @@ const login = async (req, res) => {
   const { email, password } = req.body;
 
   try {
+    const recentIpFailures = await LoginAttemptModel.countRecentFailuresByIp(ip, 15);
+    if (recentIpFailures >= 10) {
+      return sendUnauthorized(res, 'Too many login attempts from this IP. Please wait 15 minutes before trying again.');
+    }
+
     const user = await UserModel.findByEmail(email);
 
     // User not found — still log the attempt
