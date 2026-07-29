@@ -27,7 +27,7 @@ const LoginAttemptModel = {
        VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
       [
         userId,
-        email?.toLowerCase(),
+        email ? email.toLowerCase() : null,
         ip,
         userAgent,
         success,
