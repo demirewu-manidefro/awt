@@ -7,8 +7,8 @@ const jwt = require('jsonwebtoken');
 
 const ACCESS_SECRET = process.env.ACCESS_TOKEN_SECRET;
 const REFRESH_SECRET = process.env.REFRESH_TOKEN_SECRET;
-const ACCESS_EXPIRES = process.env.ACCESS_TOKEN_EXPIRES_IN || '15m';
-const REFRESH_EXPIRES = process.env.REFRESH_TOKEN_EXPIRES_IN || '7d';
+const ACCESS_EXPIRES = process.env.ACCESS_TOKEN_EXPIRES_IN || '1m';
+const REFRESH_EXPIRES = process.env.REFRESH_TOKEN_EXPIRES_IN || '5m';
 
 /**
  * Sign an access token (short-lived, 15 min)
@@ -50,7 +50,7 @@ const getRefreshCookieOptions = () => ({
   httpOnly: true,
   secure: process.env.NODE_ENV === 'production',
   sameSite: process.env.NODE_ENV === 'production' ? 'strict' : 'lax',
-  maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days in ms
+  maxAge: 5 * 60 * 1000, // 5 minutes in ms
   path: '/',
 });
 
