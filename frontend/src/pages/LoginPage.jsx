@@ -73,12 +73,13 @@ export default function LoginPage() {
 
         <div className="divider"><span>or</span></div>
 
-        <form onSubmit={handleSubmit} noValidate>
+        <form id="login-form" onSubmit={handleSubmit} noValidate>
           <div className="field-group">
             <label>Email</label>
             <div className={`input-wrap ${errors.email ? 'error' : ''}`}>
               <Mail size={16} className="input-icon" />
               <input
+                id="login-email"
                 type="email"
                 placeholder="you@example.com"
                 value={form.email}
@@ -96,6 +97,7 @@ export default function LoginPage() {
             <div className={`input-wrap ${errors.password ? 'error' : ''}`}>
               <Lock size={16} className="input-icon" />
               <input
+                id="login-password"
                 type={show ? 'text' : 'password'}
                 placeholder="Your password"
                 value={form.password}
@@ -108,7 +110,7 @@ export default function LoginPage() {
             {errors.password && <span className="field-error">{errors.password}</span>}
           </div>
 
-          <button type="submit" className="btn-primary" disabled={loading}>
+          <button id="login-submit" type="submit" className="btn-primary" disabled={loading}>
             {loading ? <span className="btn-spinner" /> : <><ArrowRight size={16} /> Sign In</>}
           </button>
         </form>

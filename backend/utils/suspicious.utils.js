@@ -55,7 +55,9 @@ const detectSuspiciousActivity = (currentRequest, recentAttempts = []) => {
   }
 
   // Rule 2: New device type
-  const knownDevices = recentAttempts.map((a) => a.device_info).filter(Boolean);
+  const knownDevices = recentAttempts
+    .map((a) => parseUserAgent(a.user_agent).device)
+    .filter(Boolean);
   const deviceType = currentDevice.toLowerCase().includes('mobile')
     ? 'mobile'
     : currentDevice.toLowerCase().includes('tablet')

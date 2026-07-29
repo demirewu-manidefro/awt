@@ -44,7 +44,7 @@ const LoginAttemptModel = {
    */
   async getRecentSuccessful(userId, limit = 20) {
     const result = await pool.query(
-      `SELECT ip_address, user_agent, device_info, attempted_at
+      `SELECT ip_address, user_agent, attempted_at
        FROM login_attempts
        WHERE user_id = $1
          AND success = TRUE
