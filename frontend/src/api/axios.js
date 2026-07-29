@@ -26,6 +26,11 @@ api.interceptors.response.use(
   (res) => res,
   async (error) => {
     const original = error.config;
+    // Do not intercept 401s for login/register endpoints
+    if (original.url.includes('/login') || original.url.includes('/register')) {
+      return Promise.reject(error);
+    }
+    
     if (error.response?.status === 401 && !original._retry) {
       if (isRefreshing) {
         return new Promise((resolve, reject) => {
