@@ -2,7 +2,7 @@
  * initDb.js — Runs schema.sql to create all tables in PostgreSQL
  * Usage: npm run db:init
  */
-require('dotenv').config({ path: require('path').join(__dirname, '../../.env') });
+require('dotenv').config({ path: require('path').join(__dirname, '../.env') });
 
 const { Pool } = require('pg');
 const fs = require('fs');
