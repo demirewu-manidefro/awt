@@ -54,7 +54,9 @@ export default function LoginPage() {
   };
 
   const googleLogin = () => {
-    window.location.href = 'http://localhost:5000/api/auth/google';
+    // For local development, use the mock route so it works without real API keys
+    const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+    window.location.href = `${baseUrl}/auth/google/mock`;
   };
 
   return (
